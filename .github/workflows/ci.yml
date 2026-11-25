@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-server-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test -p nuvi-proto -p nuvi-server
+
+  test-and-build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test --workspace
+      - run: cargo build --release -p nuvi-client -p nuvi-host
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nuvi-remote-windows
+          path: |
+            target/release/nuvi-client.exe
+            target/release/nuvi-host.exe

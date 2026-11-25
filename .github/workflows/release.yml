@@ -1,0 +1,23 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test --workspace
+      - run: cargo build --release -p nuvi-client -p nuvi-host
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            target/release/nuvi-client.exe
+            target/release/nuvi-host.exe

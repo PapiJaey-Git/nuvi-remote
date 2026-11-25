@@ -1,0 +1,3 @@
+remote.yourdomain.com {
+    reverse_proxy nuvi-server:8765
+}

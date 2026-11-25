@@ -1,0 +1,32 @@
+app = "nuvi-remote-relay"
+primary_region = "sin"
+
+[build]
+  dockerfile = "docker/Dockerfile"
+
+[env]
+  NUVI_BIND_ADDR = "0.0.0.0:8765"
+  NUVI_AUTH_MODE = "private"
+  NUVI_DATA_DIR = "/data"
+
+[http_service]
+  internal_port = 8765
+  force_https = true
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[http_service.checks]]
+    interval = "15s"
+    timeout = "3s"
+    grace_period = "5s"
+    method = "GET"
+    path = "/health"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
+
+[mounts]
+  source = "nuvi_data"
+  destination = "/data"

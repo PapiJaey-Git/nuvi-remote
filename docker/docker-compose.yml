@@ -1,0 +1,37 @@
+services:
+  nuvi-server:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: nuvi-server
+    restart: unless-stopped
+    environment:
+      NUVI_BIND_ADDR: 0.0.0.0:8765
+      NUVI_AUTH_MODE: ${NUVI_AUTH_MODE:-private}
+      NUVI_TECH_KEY: ${NUVI_TECH_KEY:-}
+      NUVI_DATA_DIR: /data
+    volumes:
+      - nuvi_data:/data
+    ports:
+      # Local testing: ws://127.0.0.1:8765/ws (comment out in production behind Caddy)
+      - "8765:8765"
+
+  # Uncomment for production TLS on port 443:
+  # caddy:
+  #   image: caddy:2-alpine
+  #   container_name: nuvi-caddy
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - nuvi-server
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./Caddyfile:/etc/caddy/Caddyfile:ro
+  #     - caddy_data:/data
+  #     - caddy_config:/config
+
+volumes:
+  nuvi_data:
+  # caddy_data:
+  # caddy_config:

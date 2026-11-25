@@ -1,0 +1,23 @@
+[package]
+name = "nuvi-proto"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+argon2.workspace = true
+base64.workspace = true
+bincode.workspace = true
+chacha20poly1305.workspace = true
+chrono.workspace = true
+ed25519-dalek.workspace = true
+rand.workspace = true
+serde.workspace = true
+sha2.workspace = true
+subtle.workspace = true
+uuid.workspace = true
+x25519-dalek.workspace = true
+zeroize.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

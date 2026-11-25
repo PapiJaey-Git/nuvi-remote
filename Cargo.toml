@@ -1,0 +1,44 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/nuvi-proto",
+    "crates/nuvi-server",
+    "crates/nuvi-client",
+    "crates/nuvi-host",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+
+[workspace.dependencies]
+anyhow = "1"
+arboard = "3"
+argon2 = "0.5"
+axum = { version = "0.8", features = ["ws"] }
+base64 = "0.22"
+bincode = "1"
+chacha20poly1305 = "0.10"
+chrono = { version = "0.4", features = ["serde"] }
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+eframe = "0.31"
+egui = "0.31"
+futures-util = "0.3"
+hex = "0.4"
+image = { version = "0.25", default-features = false, features = ["png"] }
+jpeg-encoder = "0.6"
+rand = "0.8"
+reqwest = { version = "0.12", default-features = false, features = ["json", "native-tls"] }
+rfd = "0.15"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+subtle = "2"
+tokio = { version = "1", features = ["full"] }
+tokio-tungstenite = { version = "0.26", features = ["native-tls"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+x25519-dalek = { version = "2", features = ["static_secrets"] }
+zeroize = "1"
+zune-jpeg = "0.4"
